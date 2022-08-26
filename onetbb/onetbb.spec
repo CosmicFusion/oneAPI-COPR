@@ -10,9 +10,11 @@
 %global OAPI_INSTALL_DIR /opt/oneapi-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}
 %global OAPI_LIBPATCH_VERSION %{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}
 %global OAPI_GIT_DIR %{builddir}/OAPI-build/git
-%global OAPI_GIT_TAG release/2021.4
+%global OAPI_GIT_TAG master
 %global OAPI_BUILD_DIR %{builddir}/OAPI-build/build
 %global OAPI_PATCH_DIR %{builddir}/OAPI-build/patch
+%global OAPI_GIT_URL https://github.com/oneapi-src/oneTBB
+
 
 %global toolchain clang
 
@@ -22,7 +24,6 @@ Release:  %{OAPI_LIBPATCH_VERSION}%{?dist}
 Summary:  Intel's oneAPI Threading Building Blocks
 License:  Apache 2.0
 URL:      https://oneapi.io
-Source0: https://github.com/oneapi-src/oneTBB/archive/refs/tags/v%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}.tar.gz
 
 
 Requires:      oneapi-core
@@ -76,13 +77,16 @@ mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}
 
 cd %{_sourcedir}
 
-wget https://github.com/oneapi-src/oneTBB/archive/refs/tags/v%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}.tar.gz -O %{SOURCE0} 
+#wget https://github.com/oneapi-src/oneTBB/archive/refs/tags/v%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}.tar.gz -O %{SOURCE0} 
 
+git clone -b %{OAPI_GIT_TAG} %{OAPI_GIT_URL}
 cd %{builddir}
 
-mv %{SOURCE0} ./onetbb.tar.gz
+#mv %{SOURCE0} ./onetbb.tar.gz
 
-tar -xf ./onetbb.tar.gz -C %{OAPI_GIT_DIR}
+#tar -xf ./onetbb.tar.gz -C %{OAPI_GIT_DIR}
+
+mv %{_sourcedir}/oneTBB %{OAPI_GIT_DIR}/oneTBB-%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}
 
 # Level 2 : Build
 
@@ -102,9 +106,9 @@ DESTDIR="%{buildroot}" ninja -j$(nproc) install
 
 #
 
-mkdir -p %{OAPI_INSTALL_DIR}/env/onetbb
+mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/env/onetbb
 
-cd %{OAPI_INSTALL_DIR}/env/onetbb
+cd %{buildroot}/%{OAPI_INSTALL_DIR}/env/onetbb
 
 wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/onetbb/env/vars.sh
 
@@ -112,9 +116,9 @@ chmod +x ./vars.sh
 
 #
 
-mkdir -p %{OAPI_INSTALL_DIR}/licensing/onetbb
+mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/licensing/onetbb
 
-cd %{OAPI_INSTALL_DIR}/licensing/onetbb
+cd %{buildroot}/%{OAPI_INSTALL_DIR}/licensing/onetbb
 
 wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/onetbb/licensing/license.txt
 
@@ -124,9 +128,9 @@ wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/onetbb/lice
 
 #
 
-mkdir -p %{OAPI_INSTALL_DIR}/sys_check/onetbb
+mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/sys_check/onetbb
 
-cd {OAPI_INSTALL_DIR}/sys_check/onetbb
+cd %{buildroot}/%{OAPI_INSTALL_DIR}/sys_check/onetbb
 
 wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/onetbb/sys_check/sys_check.sh
 
