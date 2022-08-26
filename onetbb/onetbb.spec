@@ -76,7 +76,7 @@ mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}
 
 cd %{_sourcedir}
 
-#wget https://github.com/oneapi-src/oneTBB/archive/refs/tags/v%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}.tar.gz -O %{SOURCE0} 
+wget https://github.com/oneapi-src/oneTBB/archive/refs/tags/v%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}.tar.gz -O %{SOURCE0} 
 
 cd %{builddir}
 
@@ -89,17 +89,64 @@ tar -xf ./onetbb.tar.gz -C %{OAPI_GIT_DIR}
 export CC=clang
 export CXX=clang++
 
-#cmake -Wno-dev -GNinja -S .. \
-#-DCMAKE_BUILD_TYPE=Release \
-#-DCMAKE_INSTALL_PREFIX=%{OAPI_INSTALL_DIR}
+cmake -Wno-dev -GNinja -S %{OAPI_GIT_DIR}/oneTBB-%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION} \
+-DCMAKE_BUILD_TYPE=Release \
+-DCMAKE_INSTALL_PREFIX=%{OAPI_INSTALL_DIR}
 
+ninja -j$(nproc)
 
 # Level 3 : Package
 
+DESTDIR="%{buildroot}" ninja -j$(nproc) install
 
+
+#
+
+mkdir -p %{OAPI_INSTALL_DIR}/env/onetbb
+
+cd %{OAPI_INSTALL_DIR}/env/onetbb
+
+wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/onetbb/env/vars.sh
+
+chmod +x ./vars.sh
+
+#
+
+mkdir -p %{OAPI_INSTALL_DIR}/licensing/onetbb
+
+cd %{OAPI_INSTALL_DIR}/licensing/onetbb
+
+wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/onetbb/licensing/license.txt
+
+wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/onetbb/licensing/license_installer.txt
+
+wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/onetbb/licensing/third-party-programs.txt
+
+#
+
+mkdir -p %{OAPI_INSTALL_DIR}/sys_check/onetbb
+
+cd {OAPI_INSTALL_DIR}/sys_check/onetbb
+
+wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/onetbb/sys_check/sys_check.sh
+
+chmod +x ./sys_check.sh
+
+#
+
+mkdir -p %{buildroot}/etc/profile.d
+
+ln -s %{OAPI_INSTALL_DIR}/env/onetbb/vars.sh  %{buildroot}/etc/profile.d/onetbb-vars.sh
+
+mkdir -p %{buildroot}/usr/lib64/pkgconfig
+
+ln -s %{OAPI_INSTALL_DIR}/lib64/pkgconfig/tbb.pc %{buildroot}/usr/lib64/pkgconfig/tbb.pc
 
 %files 
-%{OAPI_INSTALL_DIR}
+%{OAPI_INSTALL_DIR}/lib64/*
+%{OAPI_INSTALL_DIR}/env/*
+%{OAPI_INSTALL_DIR}/licensing/*
+%{OAPI_INSTALL_DIR}/sys_check/*
 
 %post
 /sbin/ldconfig

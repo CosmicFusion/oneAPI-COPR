@@ -107,6 +107,8 @@ echo 'export PATH=$PATH:/opt/oneapi:/opt/oneapi/bin' > %{buildroot}/etc/profile.
 
 ln -s %{OAPI_INSTALL_DIR} %{buildroot}/opt/oneapi
 
+ln -s %{OAPI_INSTALL_DIR}/lib64 %{buildroot}/%{OAPI_INSTALL_DIR}/lib
+
 mkdir -p %{buildroot}/etc/ld.so.conf.d
 
 touch %{buildroot}/etc/ld.so.conf.d/10-oneapi-core.conf
