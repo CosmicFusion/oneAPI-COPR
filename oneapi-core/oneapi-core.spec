@@ -1,6 +1,7 @@
 %undefine _auto_set_build_flags
 %define _build_id_links none
 
+%global builddir oneapi-core-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}-%{OAPI_LIBPATCH_VERSION}%{?dist}
 %global OAPI_MAJOR_VERSION 20
 %global OAPI_MINOR_VERSION 21
 %global OAPI_PATCH_VERSION 4.0
@@ -57,6 +58,9 @@ Intel's oneAPI common variables and licensing
 %build
 
 # Make basic structure
+mkdir -p %{builddir}
+
+cd %{builddir}
 
 mkdir -p %{OAPI_GIT_DIR}
 
@@ -65,6 +69,8 @@ mkdir -p %{OAPI_BUILD_DIR}
 mkdir -p %{OAPI_PATCH_DIR}
 
 mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}
+
+cd 
 
 # Level 1 : Create files
 
@@ -106,7 +112,7 @@ ln -s %{OAPI_INSTALL_DIR} %{buildroot}/opt/oneapi
 
 mkdir -p %{buildroot}/etc/ld.so.conf.d
 
-touch %{buildroot}/etc/profile.d/10-oneapi-core.conf
+touch %{buildroot}/etc/ld.so.conf.d/10-oneapi-core.conf
 
 echo /opt/oneapi/lib > %{buildroot}/etc/ld.so.conf.d/10-oneapi-core.conf
 
@@ -116,6 +122,7 @@ echo /opt/oneapi/lib64 >> %{buildroot}/etc/ld.so.conf.d/10-oneapi-core.conf
 /etc/ld.so.conf.d/10-oneapi-core.conf
 /etc/profile.d/oneapi-core.sh
 %{OAPI_INSTALL_DIR}
+/opt/oneapi
 
 %post
 /sbin/ldconfig
