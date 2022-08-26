@@ -105,6 +105,8 @@ chmod +x %{buildroot}/etc/profile.d/oneapi-core.sh
 
 echo 'export PATH=$PATH:/opt/oneapi:/opt/oneapi/bin' > %{buildroot}/etc/profile.d/oneapi-core.sh
 
+mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/lib64
+
 ln -s %{OAPI_INSTALL_DIR} %{buildroot}/opt/oneapi
 
 ln -s %{OAPI_INSTALL_DIR}/lib64 %{buildroot}/%{OAPI_INSTALL_DIR}/lib
