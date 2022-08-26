@@ -42,7 +42,7 @@ Requires(postun): /sbin/ldconfig
 BuildRequires: wget
 BuildRequires: oneapi-core
 BuildRequires: cmake
-BuildRequires: makecp %{SOURCE0}
+BuildRequires: make
 BuildRequires: gcc
 BuildRequires: gcc-c++
 BuildRequires: clang
