@@ -70,7 +70,7 @@ mkdir -p %{OAPI_PATCH_DIR}
 
 mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}
 
-cd 
+cd %{buildroot}/%{OAPI_INSTALL_DIR}
 
 # Level 1 : Create files
 
