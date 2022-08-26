@@ -25,7 +25,6 @@ URL:      https://oneapi.io
 Requires:      libc.so.6()(64bit)
 Requires:      libc.so.6(GLIBC_2.2.5)(64bit)
 Requires:      libgcc_s.so.1()(64bit)
-Requires:      libm.so.6()(64bit))
 Requires:      libstdc++.so.6()(64bit)
 
 Provides:      oneapi-core
