@@ -3,12 +3,13 @@
 %define _unpackaged_files_terminate_build 0
 
 %global builddir %{_builddir}/onetbb-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}-%{OAPI_LIBPATCH_VERSION}%{?dist}
-%global OAPI_MAJOR_VERSION 20
-%global OAPI_MINOR_VERSION 21
-%global OAPI_PATCH_VERSION 4.0
-%global OAPI_MAGIC_VERSION 327
+%global OAPI_MAJOR_VERSION g
+%global OAPI_MINOR_VERSION i
+%global OAPI_PATCH_VERSION t
+%global OAPI_MAGIC_VERSION none
 %global OAPI_INSTALL_DIR /opt/oneapi-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}
-%global OAPI_LIBPATCH_VERSION %{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}
+#%global OAPI_LIBPATCH_VERSION %{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}
+%global OAPI_LIBPATCH_VERSION latest
 %global OAPI_GIT_DIR %{builddir}/OAPI-build/git
 %global OAPI_GIT_TAG master
 %global OAPI_BUILD_DIR %{builddir}/OAPI-build/build
@@ -147,6 +148,8 @@ mkdir -p %{buildroot}/usr/lib64/pkgconfig
 ln -s %{OAPI_INSTALL_DIR}/lib64/pkgconfig/tbb.pc %{buildroot}/usr/lib64/pkgconfig/tbb.pc
 
 %files 
+/etc/profile.d/vars.sh
+/usr/lib64/pkgconfig/tbb.pc
 %{OAPI_INSTALL_DIR}/lib64/*
 %{OAPI_INSTALL_DIR}/env/*
 %{OAPI_INSTALL_DIR}/licensing/*

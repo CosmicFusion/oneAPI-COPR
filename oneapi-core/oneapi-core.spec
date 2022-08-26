@@ -2,14 +2,15 @@
 %define _build_id_links none
 
 %global builddir %{_builddir}/oneapi-core-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}-%{OAPI_LIBPATCH_VERSION}%{?dist}
-%global OAPI_MAJOR_VERSION 20
-%global OAPI_MINOR_VERSION 21
-%global OAPI_PATCH_VERSION 4.0
-%global OAPI_MAGIC_VERSION 327
+%global OAPI_MAJOR_VERSION g
+%global OAPI_MINOR_VERSION i
+%global OAPI_PATCH_VERSION t
+%global OAPI_MAGIC_VERSION none
 %global OAPI_INSTALL_DIR /opt/oneapi-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}
-%global OAPI_LIBPATCH_VERSION %{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}
+#%global OAPI_LIBPATCH_VERSION %{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}
+%global OAPI_LIBPATCH_VERSION latest
 %global OAPI_GIT_DIR %{builddir}/OAPI-build/git
-%global OAPI_GIT_TAG release/2021.4
+%global OAPI_GIT_TAG none
 %global OAPI_BUILD_DIR %{builddir}/OAPI-build/build
 %global OAPI_PATCH_DIR %{builddir}/OAPI-build/patch
 
