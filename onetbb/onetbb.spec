@@ -148,7 +148,7 @@ mkdir -p %{buildroot}/usr/lib64/pkgconfig
 ln -s %{OAPI_INSTALL_DIR}/lib64/pkgconfig/tbb.pc %{buildroot}/usr/lib64/pkgconfig/tbb.pc
 
 %files 
-/etc/profile.d/vars.sh
+/etc/profile.d/onetbb-vars.sh
 /usr/lib64/pkgconfig/tbb.pc
 %{OAPI_INSTALL_DIR}/lib64/*
 %{OAPI_INSTALL_DIR}/env/*
