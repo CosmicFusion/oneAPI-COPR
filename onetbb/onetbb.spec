@@ -41,6 +41,7 @@ Provides:      intel-oneapi-tbb-common(x86-64)
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 
+BuildRequires: git
 BuildRequires: wget
 BuildRequires: oneapi-core
 BuildRequires: cmake
