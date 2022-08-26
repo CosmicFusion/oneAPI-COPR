@@ -2,7 +2,7 @@
 %define _build_id_links none
 %define _unpackaged_files_terminate_build 0
 
-%global builddir oneapi-core-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}-%{OAPI_LIBPATCH_VERSION}%{?dist}
+%global builddir %{_builddir}/onetbb-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}-%{OAPI_LIBPATCH_VERSION}%{?dist}
 %global OAPI_MAJOR_VERSION 20
 %global OAPI_MINOR_VERSION 21
 %global OAPI_PATCH_VERSION 4.0
@@ -22,7 +22,7 @@ Release:  %{OAPI_LIBPATCH_VERSION}%{?dist}
 Summary:  Intel's oneAPI Threading Building Blocks
 License:  Apache 2.0
 URL:      https://oneapi.io
-Source0: https://github.com/oneapi-src/oneTBB/archive/refs/tags/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}.tar.gz
+Source0: https://github.com/oneapi-src/oneTBB/archive/refs/tags/v%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}.tar.gz
 
 
 Requires:      oneapi-core
@@ -72,13 +72,17 @@ mkdir -p %{OAPI_PATCH_DIR}
 
 mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}
 
-cd %{buildroot}/%{OAPI_INSTALL_DIR}
-
 # Level 1 : Download source
 
-cp %{SOURCE0}
+cd %{_sourcedir}
 
-tar -xf %{SOURCE0} -C %{OAPI_GIT_DIR}
+#wget https://github.com/oneapi-src/oneTBB/archive/refs/tags/v%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}.tar.gz -O %{SOURCE0} 
+
+cd %{builddir}
+
+mv %{SOURCE0} ./onetbb.tar.gz
+
+tar -xf ./onetbb.tar.gz -C %{OAPI_GIT_DIR}
 
 # Level 2 : Build
 

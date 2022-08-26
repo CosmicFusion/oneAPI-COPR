@@ -1,7 +1,7 @@
 %undefine _auto_set_build_flags
 %define _build_id_links none
 
-%global builddir oneapi-core-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}-%{OAPI_LIBPATCH_VERSION}%{?dist}
+%global %{_builddir}/builddir oneapi-core-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}-%{OAPI_LIBPATCH_VERSION}%{?dist}
 %global OAPI_MAJOR_VERSION 20
 %global OAPI_MINOR_VERSION 21
 %global OAPI_PATCH_VERSION 4.0
@@ -68,8 +68,6 @@ mkdir -p %{OAPI_BUILD_DIR}
 mkdir -p %{OAPI_PATCH_DIR}
 
 mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}
-
-cd %{buildroot}/%{OAPI_INSTALL_DIR}
 
 # Level 1 : Create files
 
