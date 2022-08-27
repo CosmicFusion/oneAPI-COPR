@@ -86,12 +86,12 @@ EOF
 
 # File N2 #
 
-wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/oneapi-core/setvars.sh -o %{buildroot}/%{OAPI_INSTALL_DIR}/setvars.sh
+wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/oneapi-core/setvars.sh -O %{buildroot}/%{OAPI_INSTALL_DIR}/setvars.sh
 chmod +x %{buildroot}/%{OAPI_INSTALL_DIR}/setvars.sh
 
 # File N3 #
 
-wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/oneapi-core/modulefiles-setup.sh -o %{buildroot}/%{OAPI_INSTALL_DIR}/modulefiles-setup.sh
+wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/oneapi-core/modulefiles-setup.sh -O %{buildroot}/%{OAPI_INSTALL_DIR}/modulefiles-setup.sh
 chmod +x %{buildroot}/%{OAPI_INSTALL_DIR}/modulefiles-setup.sh
 
 ### Files from intel-oneapi-common-licensing
