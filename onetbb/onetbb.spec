@@ -148,7 +148,49 @@ ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/pkgconfig/tbb.pc %{buildroot}/usr/l
 
 #
 
-ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/* %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
+mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
+
+ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbb.so %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
+
+ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbb.so.12 %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
+
+ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbb.so.12.7 %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
+
+ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbbbind_2_5.so %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
+
+ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbbbind_2_5.so.3 %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
+
+ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbbbind_2_5.so.3.7 %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
+
+ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbbmalloc.so %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
+
+ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbbmalloc.so.2 %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
+
+ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbbmalloc.so.2.7 %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
+
+ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbbmalloc_proxy.so %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
+
+ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbbmalloc_proxy.so.2 %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
+
+ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbbmalloc_proxy.so.2.7 %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
+
+#
+
+mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/pkgconfig
+
+ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/pkgconfig/tbb.pc %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/pkgconfig
+
+#
+
+mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/cmake/TBB
+
+ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/cmake/TBB/TBBConfig.cmake %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/cmake/TBB
+
+ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/cmake/TBB/TBBConfigVersion.cmake %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/cmake/TBB
+
+ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/cmake/TBB/TBBTargets.cmake %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/cmake/TBB
+
+ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/cmake/TBB/TBBTargets-release.cmake %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/cmake/TBB
 
 #
 
