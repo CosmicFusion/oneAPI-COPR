@@ -140,88 +140,42 @@ chmod +x ./sys_check.sh
 
 mkdir -p %{buildroot}/etc/profile.d
 
-ln -s %{OAPI_INSTALL_DIR}/onetbb/env/vars.sh  %{buildroot}/etc/profile.d/onetbb-vars.sh
+ln -s %{OAPI_INSTALL_DIR}/env/onetbb/vars.sh  %{buildroot}/etc/profile.d/onetbb-vars.sh
 
 mkdir -p %{buildroot}/usr/lib64/pkgconfig
 
-ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/pkgconfig/tbb.pc %{buildroot}/usr/lib64/pkgconfig/tbb.pc
-
-#
-
-mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
-
-ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbb.so %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
-
-ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbb.so.12 %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
-
-ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbb.so.12.7 %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
-
-ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbbbind_2_5.so %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
-
-ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbbbind_2_5.so.3 %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
-
-ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbbbind_2_5.so.3.7 %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
-
-ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbbmalloc.so %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
-
-ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbbmalloc.so.2 %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
-
-ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbbmalloc.so.2.7 %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
-
-ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbbmalloc_proxy.so %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
-
-ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbbmalloc_proxy.so.2 %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
-
-ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbbmalloc_proxy.so.2.7 %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
-
-#
-
-mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/pkgconfig
-
-ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/pkgconfig/tbb.pc %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/pkgconfig
-
-#
-
-mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/cmake/TBB
-
-ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/cmake/TBB/TBBConfig.cmake %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/cmake/TBB
-
-ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/cmake/TBB/TBBConfigVersion.cmake %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/cmake/TBB
-
-ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/cmake/TBB/TBBTargets.cmake %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/cmake/TBB
-
-ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/cmake/TBB/TBBTargets-release.cmake %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/cmake/TBB
-
-#
-
-mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/env
-
-ln -s %{OAPI_INSTALL_DIR}/onetbb/env %{buildroot}/%{OAPI_INSTALL_DIR}/env/onetbb
-
-
-#
-
-mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/licensing
-
-ln -s %{OAPI_INSTALL_DIR}/onetbb/licensing %{buildroot}/%{OAPI_INSTALL_DIR}/licensing/onetbb
-
-#
-
-mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/sys_check
-
-ln -s %{OAPI_INSTALL_DIR}/onetbb/sys_check %{buildroot}/%{OAPI_INSTALL_DIR}/sys_check/onetbb
+ln -s %{OAPI_INSTALL_DIR}/lib64/pkgconfig/tbb.pc %{buildroot}/usr/lib64/pkgconfig/tbb.pc
 
 %files 
 /etc/profile.d/onetbb-vars.sh
 /usr/lib64/pkgconfig/tbb.pc
 %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/*
-%{OAPI_INSTALL_DIR}/lib64/*
-%{OAPI_INSTALL_DIR}/env/onetbb
-%{OAPI_INSTALL_DIR}/licensing/onetbb
-%{OAPI_INSTALL_DIR}/sys_check/onetbb
+%{OAPI_INSTALL_DIR}/onetbb/env/*
+%{OAPI_INSTALL_DIR}/onetbb/licensing/*
+%{OAPI_INSTALL_DIR}/onetbb/sys_check/*
 
 %post
+mkdir -p %{OAPI_INSTALL_DIR}/lib64 || echo "library path exists."
+ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbb* %{OAPI_INSTALL_DIR}/lib64/
+mkdir -p %{OAPI_INSTALL_DIR}/lib64/pkgconfig || echo "pkgconfig exists."
+ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/pkgconfig/tbb.pc %{OAPI_INSTALL_DIR}/lib64/pkgconfig/
+mkdir -p %{OAPI_INSTALL_DIR}/lib64/cmake/TBB || echo "cmake path exists."
+ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/cmake/TBB/* %{OAPI_INSTALL_DIR}/lib64/cmake/TBB/
+mkdir -p %{OAPI_INSTALL_DIR}/env || echo "env path exists." 
+ln -s %{OAPI_INSTALL_DIR}/onetbb/env %{OAPI_INSTALL_DIR}/env/onetbb
+mkdir -p %{OAPI_INSTALL_DIR}/licensing || echo "licensing path exists."
+ln -s %{OAPI_INSTALL_DIR}/onetbb/licensing %{OAPI_INSTALL_DIR}/licensing/onetbb
+mkdir -p %{OAPI_INSTALL_DIR}/sys_check || echo "sys path exists."
+ln -s %{OAPI_INSTALL_DIR}/onetbb/sys_check %{OAPI_INSTALL_DIR}/sys_check/onetbb
+ln -s %{OAPI_INSTALL_DIR}/onetbb/env/../lib/intel64 %{OAPI_INSTALL_DIR}/onetbb/env/../lib/intel64/gcc4.8
 /sbin/ldconfig
 
 %postun
+rm -r %{OAPI_INSTALL_DIR}/lib64/libtbb* || echo "TBB libs not present"
+rm -r %{OAPI_INSTALL_DIR}/lib64/pkgconfig/tbb.pc || rchp "TBB pkgconfig not found."
+rm -r %{OAPI_INSTALL_DIR}/lib64/cmake/TBB || echo "cmake not found."
+rm -r %{OAPI_INSTALL_DIR}/env/onetbb || echo "env path not found." 
+rm -r %{OAPI_INSTALL_DIR}/licensing/onetbb || echo "licensing not found."
+rm -r %{OAPI_INSTALL_DIR}/sys_check/onetbb || echo "sys path not found."
+rm -r %{OAPI_INSTALL_DIR}/onetbb/env/../lib/intel64/gcc4.8 || echo "upstream dir not linked"
 /sbin/ldconfig
