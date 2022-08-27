@@ -105,7 +105,7 @@ touch %{buildroot}/etc/profile.d/oneapi-core.sh
 
 chmod +x %{buildroot}/etc/profile.d/oneapi-core.sh
 
-echo 'export PATH=$PATH:/opt/oneapi:/opt/oneapi/bin' > %{buildroot}/etc/profile.d/oneapi-core.sh
+echo 'export PATH=$PATH:%{OAPI_GLOBAL_DIR}:%{OAPI_GLOBAL_DIR}/bin' > %{buildroot}/etc/profile.d/oneapi-core.sh
 
 mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/lib64
 
@@ -125,7 +125,7 @@ echo %{OAPI_GLOBAL_DIR}/lib64 >> %{buildroot}/etc/ld.so.conf.d/10-oneapi-core.co
 /etc/ld.so.conf.d/10-oneapi-core.conf
 /etc/profile.d/oneapi-core.sh
 %{OAPI_INSTALL_DIR}
-/opt/oneapi
+%{OAPI_GLOBAL_DIR}
 
 %post
 /sbin/ldconfig
