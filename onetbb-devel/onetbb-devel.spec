@@ -110,7 +110,7 @@ ln -s %{OAPI_INSTALL_DIR}/onetbb/include/tbb %{OAPI_INSTALL_DIR}/include/
 /sbin/ldconfig
 
 %postun
-rm -r %{OAPI_INSTALL_DIR}/onetbb/include/oneapi/tbb* || echo "oneapi include path not present."
-rm -r %{OAPI_INSTALL_DIR}/onetbb/include/tbb || echo "tbb include path not present."
+rm -r %{OAPI_INSTALL_DIR}/include/oneapi/tbb* || echo "oneapi include path not present."
+rm -r %{OAPI_INSTALL_DIR}/include/tbb || echo "tbb include path not present."
 /sbin/ldconfig
 
