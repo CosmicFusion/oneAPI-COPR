@@ -106,9 +106,9 @@ mv %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/lib64 %{buildroot}/%{OAPI_INSTALL_DIR
 
 #
 
-mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/env/onetbb
+mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/env
 
-cd %{buildroot}/%{OAPI_INSTALL_DIR}/env/onetbb
+cd %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/env
 
 wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/onetbb/env/vars.sh
 
@@ -194,6 +194,19 @@ ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/cmake/TBB/TBBTargets-release.cmake 
 
 #
 
+mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/env
+
+ln -s %{OAPI_INSTALL_DIR}/onetbb/env %{buildroot}/%{OAPI_INSTALL_DIR}/env/onetbb
+
+
+#
+
+mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/licensing
+
+ln -s %{OAPI_INSTALL_DIR}/onetbb/licensing %{buildroot}/%{OAPI_INSTALL_DIR}/licensing/onetbb
+
+#
+
 mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/sys_check
 
 ln -s %{OAPI_INSTALL_DIR}/onetbb/sys_check %{buildroot}/%{OAPI_INSTALL_DIR}/sys_check/onetbb
@@ -201,7 +214,7 @@ ln -s %{OAPI_INSTALL_DIR}/onetbb/sys_check %{buildroot}/%{OAPI_INSTALL_DIR}/sys_
 %files 
 /etc/profile.d/onetbb-vars.sh
 /usr/lib64/pkgconfig/tbb.pc
-{OAPI_INSTALL_DIR}/onetbb/lib/intel64/*
+%{OAPI_INSTALL_DIR}/onetbb/lib/intel64/*
 %{OAPI_INSTALL_DIR}/lib64/*
 %{OAPI_INSTALL_DIR}/env/onetbb/*
 %{OAPI_INSTALL_DIR}/licensing/onetbb/*
@@ -212,4 +225,3 @@ ln -s %{OAPI_INSTALL_DIR}/onetbb/sys_check %{buildroot}/%{OAPI_INSTALL_DIR}/sys_
 
 %postun
 /sbin/ldconfig
-
