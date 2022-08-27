@@ -91,7 +91,7 @@ export CXX=clang++
 
 cmake -Wno-dev -GNinja -S %{OAPI_GIT_DIR}/oneTBB-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION} \
 -DCMAKE_BUILD_TYPE=Release \
--DCMAKE_INSTALL_PREFIX=%{OAPI_INSTALL_DIR}/onetbb
+-DCMAKE_INSTALL_PREFIX=%{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}
 
 ninja -j$(nproc)
 
@@ -101,12 +101,12 @@ DESTDIR="%{buildroot}" ninja -j$(nproc) install
 
 
 %files 
-%{OAPI_INSTALL_DIR}/onetbb/include/*
+%{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/include/*
 
 %post
 mkdir -p %{OAPI_INSTALL_DIR}/include/oneapi || echo "include path exists."
-ln -s %{OAPI_INSTALL_DIR}/onetbb/include/oneapi/tbb* %{OAPI_INSTALL_DIR}/include/oneapi/
-ln -s %{OAPI_INSTALL_DIR}/onetbb/include/tbb %{OAPI_INSTALL_DIR}/include/
+ln -s %{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/include/oneapi/tbb* %{OAPI_INSTALL_DIR}/include/oneapi/
+ln -s %{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/include/tbb %{OAPI_INSTALL_DIR}/include/
 /sbin/ldconfig
 
 %postun

@@ -93,7 +93,7 @@ export CXX=clang++
 
 cmake -Wno-dev -GNinja -S %{OAPI_GIT_DIR}/oneTBB-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION} \
 -DCMAKE_BUILD_TYPE=Release \
--DCMAKE_INSTALL_PREFIX=%{OAPI_INSTALL_DIR}/onetbb
+-DCMAKE_INSTALL_PREFIX=%{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}
 
 ninja -j$(nproc)
 
@@ -101,15 +101,15 @@ ninja -j$(nproc)
 
 DESTDIR="%{buildroot}" ninja -j$(nproc) install
 
-mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/lib
+mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib
 
-mv %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/lib64 %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/lib/intel64
+mv %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib64 %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64
 
 #
 
-mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/env
+mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/env
 
-cd %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/env
+cd %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/env
 
 wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/onetbb/env/vars.sh
 
@@ -117,9 +117,9 @@ chmod +x ./vars.sh
 
 #
 
-mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/licensing
+mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/licensing
 
-cd %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/licensing
+cd %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/licensing
 
 wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/onetbb/licensing/license.txt
 
@@ -129,9 +129,9 @@ wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/onetbb/lice
 
 #
 
-mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/sys_check
+mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/sys_check
 
-cd %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/sys_check
+cd %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/sys_check
 
 wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/onetbb/sys_check/sys_check.sh
 
@@ -150,25 +150,25 @@ ln -s %{OAPI_INSTALL_DIR}/lib64/pkgconfig/tbb.pc %{buildroot}/usr/lib64/pkgconfi
 %files 
 /etc/profile.d/onetbb-vars.sh
 /usr/lib64/pkgconfig/tbb.pc
-%{OAPI_INSTALL_DIR}/onetbb/lib/intel64/*
-%{OAPI_INSTALL_DIR}/onetbb/env/*
-%{OAPI_INSTALL_DIR}/onetbb/licensing/*
-%{OAPI_INSTALL_DIR}/onetbb/sys_check/*
+%{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64/*
+%{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/env/*
+%{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/licensing/*
+%{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/sys_check/*
 
 %post
 mkdir -p %{OAPI_INSTALL_DIR}/lib64 || echo "library path exists."
-ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/libtbb* %{OAPI_INSTALL_DIR}/lib64/
+ln -s %{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64/libtbb* %{OAPI_INSTALL_DIR}/lib64/
 mkdir -p %{OAPI_INSTALL_DIR}/lib64/pkgconfig || echo "pkgconfig exists."
-ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/pkgconfig/tbb.pc %{OAPI_INSTALL_DIR}/lib64/pkgconfig/
+ln -s %{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64/pkgconfig/tbb.pc %{OAPI_INSTALL_DIR}/lib64/pkgconfig/
 mkdir -p %{OAPI_INSTALL_DIR}/lib64/cmake/TBB || echo "cmake path exists."
-ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/cmake/TBB/* %{OAPI_INSTALL_DIR}/lib64/cmake/TBB/
+ln -s %{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64/cmake/TBB/* %{OAPI_INSTALL_DIR}/lib64/cmake/TBB/
 mkdir -p %{OAPI_INSTALL_DIR}/env || echo "env path exists." 
-ln -s %{OAPI_INSTALL_DIR}/onetbb/env %{OAPI_INSTALL_DIR}/env/onetbb
+ln -s %{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/env %{OAPI_INSTALL_DIR}/env/onetbb
 mkdir -p %{OAPI_INSTALL_DIR}/licensing || echo "licensing path exists."
-ln -s %{OAPI_INSTALL_DIR}/onetbb/licensing %{OAPI_INSTALL_DIR}/licensing/onetbb
+ln -s %{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/licensing %{OAPI_INSTALL_DIR}/licensing/onetbb
 mkdir -p %{OAPI_INSTALL_DIR}/sys_check || echo "sys path exists."
-ln -s %{OAPI_INSTALL_DIR}/onetbb/sys_check %{OAPI_INSTALL_DIR}/sys_check/onetbb
-ln -s %{OAPI_INSTALL_DIR}/onetbb/env/../lib/intel64 %{OAPI_INSTALL_DIR}/onetbb/env/../lib/intel64/gcc4.8
+ln -s %{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/sys_check %{OAPI_INSTALL_DIR}/sys_check/onetbb
+ln -s %{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/env/../lib/intel64 %{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/env/../lib/intel64/gcc4.8
 /sbin/ldconfig
 
 %postun
@@ -178,5 +178,5 @@ rm -r %{OAPI_INSTALL_DIR}/lib64/cmake/TBB || echo "cmake not found."
 rm -r %{OAPI_INSTALL_DIR}/env/onetbb || echo "env path not found." 
 rm -r %{OAPI_INSTALL_DIR}/licensing/onetbb || echo "licensing not found."
 rm -r %{OAPI_INSTALL_DIR}/sys_check/onetbb || echo "sys path not found."
-rm -r %{OAPI_INSTALL_DIR}/onetbb/env/../lib/intel64/gcc4.8 || echo "upstream dir not linked"
+rm -r %{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/env/../lib/intel64/gcc4.8 || echo "upstream dir not linked"
 /sbin/ldconfig
