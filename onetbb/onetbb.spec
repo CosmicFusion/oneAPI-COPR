@@ -216,9 +216,9 @@ ln -s %{OAPI_INSTALL_DIR}/onetbb/sys_check %{buildroot}/%{OAPI_INSTALL_DIR}/sys_
 /usr/lib64/pkgconfig/tbb.pc
 %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/*
 %{OAPI_INSTALL_DIR}/lib64/*
-%{OAPI_INSTALL_DIR}/env/onetbb/*
-%{OAPI_INSTALL_DIR}/licensing/onetbb/*
-%{OAPI_INSTALL_DIR}/sys_check/onetbb/*
+%{OAPI_INSTALL_DIR}/env/onetbb
+%{OAPI_INSTALL_DIR}/licensing/onetbb
+%{OAPI_INSTALL_DIR}/sys_check/onetbb
 
 %post
 /sbin/ldconfig
