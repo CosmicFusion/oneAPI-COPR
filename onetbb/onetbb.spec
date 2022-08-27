@@ -100,6 +100,7 @@ ninja -j$(nproc)
 
 DESTDIR="%{buildroot}" ninja -j$(nproc) install
 
+mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/lib
 
 mv %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/lib64 %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/lib/intel64
 
@@ -145,14 +146,24 @@ mkdir -p %{buildroot}/usr/lib64/pkgconfig
 
 ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/pkgconfig/tbb.pc %{buildroot}/usr/lib64/pkgconfig/tbb.pc
 
+#
+
+ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/* %{buildroot}/%{OAPI_INSTALL_DIR}/lib64/
+
+#
+
+mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/sys_check
+
+ln -s %{OAPI_INSTALL_DIR}/onetbb/sys_check %{buildroot}/%{OAPI_INSTALL_DIR}/sys_check/onetbb
+
 %files 
 /etc/profile.d/onetbb-vars.sh
 /usr/lib64/pkgconfig/tbb.pc
 {OAPI_INSTALL_DIR}/onetbb/lib/intel64/*
-#%{OAPI_INSTALL_DIR}/lib64/*
-#%{OAPI_INSTALL_DIR}/env/*
-#%{OAPI_INSTALL_DIR}/licensing/*
-#%{OAPI_INSTALL_DIR}/sys_check/*
+%{OAPI_INSTALL_DIR}/lib64/*
+%{OAPI_INSTALL_DIR}/env/onetbb/*
+%{OAPI_INSTALL_DIR}/licensing/onetbb/*
+%{OAPI_INSTALL_DIR}/sys_check/onetbb/*
 
 %post
 /sbin/ldconfig
