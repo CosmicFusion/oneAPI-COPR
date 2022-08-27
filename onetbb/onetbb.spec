@@ -92,7 +92,7 @@ export CXX=clang++
 
 cmake -Wno-dev -GNinja -S %{OAPI_GIT_DIR}/oneTBB-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION} \
 -DCMAKE_BUILD_TYPE=Release \
--DCMAKE_INSTALL_PREFIX=%{OAPI_INSTALL_DIR}
+-DCMAKE_INSTALL_PREFIX=%{OAPI_INSTALL_DIR}/onetbb
 
 ninja -j$(nproc)
 
@@ -100,6 +100,8 @@ ninja -j$(nproc)
 
 DESTDIR="%{buildroot}" ninja -j$(nproc) install
 
+
+mv %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/lib64 %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/lib/intel64
 
 #
 
@@ -113,9 +115,9 @@ chmod +x ./vars.sh
 
 #
 
-mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/licensing/onetbb
+mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/licensing
 
-cd %{buildroot}/%{OAPI_INSTALL_DIR}/licensing/onetbb
+cd %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/licensing
 
 wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/onetbb/licensing/license.txt
 
@@ -125,9 +127,9 @@ wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/onetbb/lice
 
 #
 
-mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/sys_check/onetbb
+mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/sys_check
 
-cd %{buildroot}/%{OAPI_INSTALL_DIR}/sys_check/onetbb
+cd %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/sys_check
 
 wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/onetbb/sys_check/sys_check.sh
 
@@ -137,19 +139,20 @@ chmod +x ./sys_check.sh
 
 mkdir -p %{buildroot}/etc/profile.d
 
-ln -s %{OAPI_INSTALL_DIR}/env/onetbb/vars.sh  %{buildroot}/etc/profile.d/onetbb-vars.sh
+ln -s %{OAPI_INSTALL_DIR}/onetbb/env/vars.sh  %{buildroot}/etc/profile.d/onetbb-vars.sh
 
 mkdir -p %{buildroot}/usr/lib64/pkgconfig
 
-ln -s %{OAPI_INSTALL_DIR}/lib64/pkgconfig/tbb.pc %{buildroot}/usr/lib64/pkgconfig/tbb.pc
+ln -s %{OAPI_INSTALL_DIR}/onetbb/lib/intel64/pkgconfig/tbb.pc %{buildroot}/usr/lib64/pkgconfig/tbb.pc
 
 %files 
 /etc/profile.d/onetbb-vars.sh
 /usr/lib64/pkgconfig/tbb.pc
-%{OAPI_INSTALL_DIR}/lib64/*
-%{OAPI_INSTALL_DIR}/env/*
-%{OAPI_INSTALL_DIR}/licensing/*
-%{OAPI_INSTALL_DIR}/sys_check/*
+{OAPI_INSTALL_DIR}/onetbb/lib/intel64/*
+#%{OAPI_INSTALL_DIR}/lib64/*
+#%{OAPI_INSTALL_DIR}/env/*
+#%{OAPI_INSTALL_DIR}/licensing/*
+#%{OAPI_INSTALL_DIR}/sys_check/*
 
 %post
 /sbin/ldconfig
