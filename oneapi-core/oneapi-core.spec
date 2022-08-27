@@ -6,7 +6,8 @@
 %global OAPI_MINOR_VERSION i
 %global OAPI_PATCH_VERSION t
 %global OAPI_MAGIC_VERSION none
-%global OAPI_INSTALL_DIR /opt/oneapi-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}
+%global OAPI_INSTALL_DIR /opt/intel/oneapi-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}
+%global OAPI_GLOBAL_DIR /opt/intel/oneapi
 #%global OAPI_LIBPATCH_VERSION %{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}
 %global OAPI_LIBPATCH_VERSION latest
 %global OAPI_GIT_DIR %{builddir}/OAPI-build/git
@@ -108,7 +109,7 @@ echo 'export PATH=$PATH:/opt/oneapi:/opt/oneapi/bin' > %{buildroot}/etc/profile.
 
 mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/lib64
 
-ln -s %{OAPI_INSTALL_DIR} %{buildroot}/opt/oneapi
+ln -s %{OAPI_INSTALL_DIR} %{buildroot}/%{OAPI_GLOBAL_DIR}
 
 ln -s %{OAPI_INSTALL_DIR}/lib64 %{buildroot}/%{OAPI_INSTALL_DIR}/lib
 
@@ -116,9 +117,9 @@ mkdir -p %{buildroot}/etc/ld.so.conf.d
 
 touch %{buildroot}/etc/ld.so.conf.d/10-oneapi-core.conf
 
-echo /opt/oneapi/lib > %{buildroot}/etc/ld.so.conf.d/10-oneapi-core.conf
+echo %{OAPI_GLOBAL_DIR}/lib > %{buildroot}/etc/ld.so.conf.d/10-oneapi-core.conf
 
-echo /opt/oneapi/lib64 >> %{buildroot}/etc/ld.so.conf.d/10-oneapi-core.conf
+echo %{OAPI_GLOBAL_DIR}/lib64 >> %{buildroot}/etc/ld.so.conf.d/10-oneapi-core.conf
 
 %files 
 /etc/ld.so.conf.d/10-oneapi-core.conf
