@@ -79,23 +79,18 @@ mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}
 
 cd %{_sourcedir}
 
-#wget https://github.com/oneapi-src/oneTBB/archive/refs/tags/v%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}.tar.gz -O %{SOURCE0} 
-
 git clone -b %{OAPI_GIT_TAG} %{OAPI_GIT_URL}
+
 cd %{builddir}
 
-#mv %{SOURCE0} ./onetbb.tar.gz
-
-#tar -xf ./onetbb.tar.gz -C %{OAPI_GIT_DIR}
-
-mv %{_sourcedir}/oneTBB %{OAPI_GIT_DIR}/oneTBB-%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}
+mv %{_sourcedir}/oneTBB %{OAPI_GIT_DIR}/oneTBB-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}
 
 # Level 2 : Build
 
 export CC=clang
 export CXX=clang++
 
-cmake -Wno-dev -GNinja -S %{OAPI_GIT_DIR}/oneTBB-%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION} \
+cmake -Wno-dev -GNinja -S %{OAPI_GIT_DIR}/oneTBB-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION} \
 -DCMAKE_BUILD_TYPE=Release \
 -DCMAKE_INSTALL_PREFIX=%{OAPI_INSTALL_DIR}
 

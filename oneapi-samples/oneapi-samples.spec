@@ -59,9 +59,10 @@ cd %{_sourcedir}
 
 
 git clone -b %{OAPI_GIT_TAG} %{OAPI_GIT_URL}
+
 cd %{builddir}
 
-mv %{_sourcedir}/oneAPI-samples %{OAPI_GIT_DIR}/oneAPI-samples-%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}
+mv %{_sourcedir}/oneAPI-samples %{OAPI_GIT_DIR}/oneAPI-samples-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}
 
 # Level 2 : Package
 
@@ -69,17 +70,17 @@ mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/share/oneapi-samples/samples
 
 mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/licensing/oneapi-samples
 
-mv %{OAPI_GIT_DIR}/oneAPI-samples-%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/AI-and-Analytics %{buildroot}/%{OAPI_INSTALL_DIR}/share/oneapi-samples/samples/
-mv %{OAPI_GIT_DIR}/oneAPI-samples-%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/common %{buildroot}/%{OAPI_INSTALL_DIR}/share/oneapi-samples/samples/
-mv %{OAPI_GIT_DIR}/oneAPI-samples-%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/DirectProgramming %{buildroot}/%{OAPI_INSTALL_DIR}/share/oneapi-samples/samples/
-mv %{OAPI_GIT_DIR}/oneAPI-samples-%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/Libraries %{buildroot}/%{OAPI_INSTALL_DIR}/share/oneapi-samples/samples/
-mv %{OAPI_GIT_DIR}/oneAPI-samples-%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/Publications %{buildroot}/%{OAPI_INSTALL_DIR}/share/oneapi-samples/samples/
-mv %{OAPI_GIT_DIR}/oneAPI-samples-%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/RenderingToolkit %{buildroot}/%{OAPI_INSTALL_DIR}/share/oneapi-samples/samples/
-mv %{OAPI_GIT_DIR}/oneAPI-samples-%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/Tools %{buildroot}/%{OAPI_INSTALL_DIR}/share/oneapi-samples/samples/
+mv %{OAPI_GIT_DIR}/oneAPI-samples-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/AI-and-Analytics %{buildroot}/%{OAPI_INSTALL_DIR}/share/oneapi-samples/samples/
+mv %{OAPI_GIT_DIR}/oneAPI-samples-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/common %{buildroot}/%{OAPI_INSTALL_DIR}/share/oneapi-samples/samples/
+mv %{OAPI_GIT_DIR}/oneAPI-samples-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/DirectProgramming %{buildroot}/%{OAPI_INSTALL_DIR}/share/oneapi-samples/samples/
+mv %{OAPI_GIT_DIR}/oneAPI-samples-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/Libraries %{buildroot}/%{OAPI_INSTALL_DIR}/share/oneapi-samples/samples/
+mv %{OAPI_GIT_DIR}/oneAPI-samples-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/Publications %{buildroot}/%{OAPI_INSTALL_DIR}/share/oneapi-samples/samples/
+mv %{OAPI_GIT_DIR}/oneAPI-samples-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/RenderingToolkit %{buildroot}/%{OAPI_INSTALL_DIR}/share/oneapi-samples/samples/
+mv %{OAPI_GIT_DIR}/oneAPI-samples-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/Tools %{buildroot}/%{OAPI_INSTALL_DIR}/share/oneapi-samples/samples/
 
-mv %{OAPI_GIT_DIR}/oneAPI-samples-%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/License.txt %{buildroot}/%{OAPI_INSTALL_DIR}/licensing/oneapi-samples
-mv %{OAPI_GIT_DIR}/oneAPI-samples-%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/third-party-programs.txt %{buildroot}/%{OAPI_INSTALL_DIR}/licensing/oneapi-samples
-mv %{OAPI_GIT_DIR}/oneAPI-samples-%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/CODEOWNERS  %{buildroot}/%{OAPI_INSTALL_DIR}/licensing/oneapi-samples
+mv %{OAPI_GIT_DIR}/oneAPI-samples-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/License.txt %{buildroot}/%{OAPI_INSTALL_DIR}/licensing/oneapi-samples
+mv %{OAPI_GIT_DIR}/oneAPI-samples-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/third-party-programs.txt %{buildroot}/%{OAPI_INSTALL_DIR}/licensing/oneapi-samples
+mv %{OAPI_GIT_DIR}/oneAPI-samples-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/CODEOWNERS  %{buildroot}/%{OAPI_INSTALL_DIR}/licensing/oneapi-samples
 
 %files 
 %{OAPI_INSTALL_DIR}/share/oneapi-samples/
