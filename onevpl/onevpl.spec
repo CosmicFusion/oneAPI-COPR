@@ -106,7 +106,7 @@ cd %{builddir}
 
 mv %{_sourcedir}/oneVPL %{OAPI_GIT_DIR}/oneVPL-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}
 
-mv %{_sourcedir}/oneVPL %{OAPI_GIT_DIR}/oneVPL-cpu-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}
+mv %{_sourcedir}/oneVPL-cpu %{OAPI_GIT_DIR}/oneVPL-cpu-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}
 
 # Level 2 : Build
 
@@ -144,6 +144,20 @@ mkdir -p %{OAPI_BUILD_DIR}
 
 # Stage 2 : onevpl-gpu-intel
 
+# Level 1 : Download source
+
+cd %{_sourcedir}
+
+git clone -b %{OAPI_GIT_TAG3} %{OAPI_GIT_URL3}
+
+
+cd %{builddir}
+
+mv %{_sourcedir}/oneVPL-intel-gpu %{OAPI_GIT_DIR}/oneVPL-intel-gpu-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}
+
+
+# Level 2 : Build
+
 cd %{OAPI_BUILD_DIR}
 export CC=clang
 export CXX=clang++
@@ -161,9 +175,11 @@ cmake -Wno-dev -GNinja -S .. \
 -DENABLE_ITT=ON \
 -DCMAKE_ITT_HOME=/opt/intel/oneapi/oneitt/git
 
+ninja -j$(nproc)
 
+# Level 3 : Package
 
-#
+DESTDIR="%{buildroot}" ninja -j$(nproc) install
 
 mkdir -p %{buildroot}/etc/profile.d
 
