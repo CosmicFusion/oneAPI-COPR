@@ -106,7 +106,7 @@ mv include %{buildroot}/%{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_M
 %post
 mkdir -p %{OAPI_INSTALL_DIR}/lib64 || echo "library path exists."
 ln -s %{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64/libittnotify.a %{OAPI_INSTALL_DIR}/lib64/
-ln -s %{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64/libittnotify.a %{OAPI_INSTALL_DIR}/lib64/libittnotify.a
+ln -s %{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64/libittnotify.a %{OAPI_INSTALL_DIR}/lib64/libittnotify
 ln -s %{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64/libittnotify.a %{OAPI_INSTALL_DIR}/lib64/ittnotify64.a
 ln -s %{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64/libittnotify.a %{OAPI_INSTALL_DIR}/lib64/ittnotify64
 mkdir -p %{OAPI_INSTALL_DIR}/include/oneapi/ || echo "include path exists."
