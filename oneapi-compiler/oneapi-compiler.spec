@@ -127,7 +127,7 @@ export CXX=clang++
     -DLLVM_ENABLE_OCAMLDOC=OFF \
     -DLLVM_INCLUDE_BENCHMARKS=OFF \
     -DLLVM_BUILD_TESTS=OFF \
-    -DLLVM_ENABLE_PROJECTS='llvm;clang;compiler-rt;lld'
+    -DLLVM_ENABLE_PROJECTS='llvm'
     ninja -j$(nproc)
 
 
