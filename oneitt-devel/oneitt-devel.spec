@@ -98,9 +98,7 @@ mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MIN
 
 mv build_linux/64/bin/libittnotify.a %{buildroot}/%{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64/
 
-mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/include/oneapi
-
-mv include %{buildroot}/%{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/include/oneapi/itt
+mv include %{buildroot}/%{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/
 
 %files 
 %{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}
@@ -108,7 +106,8 @@ mv include %{buildroot}/%{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_M
 %post
 mkdir -p %{OAPI_INSTALL_DIR}/lib64 || echo "library path exists."
 ln -s %{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64/libittnotify.a %{OAPI_INSTALL_DIR}/lib64/
-ln -s %{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/include/oneapi/itt %{OAPI_INSTALL_DIR}/include/oneapi/
+mkdir -p %{OAPI_INSTALL_DIR}/include/oneapi/ || echo "include path exists."
+ln -s %{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/include %{OAPI_INSTALL_DIR}/include/oneapi/itt
 /sbin/ldconfig
 
 %postun
