@@ -144,7 +144,7 @@ echo %{OAPI_INSTALL_DIR}/oneapi-compiler/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSI
 
 %files
 /etc/ld.so.conf.d/*
-/opt/rocm-%{ROCM_MAJOR_VERSION}.%{ROCM_MINOR_VERSION}.%{ROCM_PATCH_VERSION}/llvm/*
+%{OAPI_INSTALL_DIR}/oneapi-compiler/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}
 
 %post
 /sbin/ldconfig
