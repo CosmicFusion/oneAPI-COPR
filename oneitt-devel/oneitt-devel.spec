@@ -109,6 +109,8 @@ ln -s %{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAP
 ln -s %{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64/libittnotify.a %{OAPI_INSTALL_DIR}/lib64/libittnotify
 ln -s %{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64/libittnotify.a %{OAPI_INSTALL_DIR}/lib64/ittnotify64.a
 ln -s %{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64/libittnotify.a %{OAPI_INSTALL_DIR}/lib64/ittnotify64
+ln -s %{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64/libittnotify.a %{OAPI_INSTALL_DIR}/lib64/ittnotify.a
+ln -s %{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64/libittnotify.a %{OAPI_INSTALL_DIR}/lib64/ittnotify
 mkdir -p %{OAPI_INSTALL_DIR}/include/oneapi/ || echo "include path exists."
 ln -s %{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/include %{OAPI_INSTALL_DIR}/include/oneapi/itt
 ln -s %{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/include %{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/include/oneapi
@@ -119,6 +121,8 @@ rm -r %{OAPI_INSTALL_DIR}/lib64/libittnotify.a || echo "itt libs not present"
 rm -r %{OAPI_INSTALL_DIR}/lib64/libittnotify || echo "itt libs not present"
 rm -r %{OAPI_INSTALL_DIR}/lib64/ittnotify64.a || echo "itt libs not present"
 rm -r %{OAPI_INSTALL_DIR}/lib64/ittnotify64 || echo "itt libs not present"
+rm -r %{OAPI_INSTALL_DIR}/lib64/ittnotify.a || echo "itt libs not present"
+rm -r %{OAPI_INSTALL_DIR}/lib64/ittnotify || echo "itt libs not present"
 rm -r %{OAPI_INSTALL_DIR}/include/oneapi/itt || echo "oneapi include path not present."
 rm -r %{OAPI_INSTALL_DIR}/oneitt/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/include/oneapi || echo "oneapi include path not present."
 /sbin/ldconfig
