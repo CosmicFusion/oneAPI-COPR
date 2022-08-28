@@ -99,18 +99,34 @@ ninja -j$(nproc)
 
 DESTDIR="%{buildroot}" ninja -j$(nproc) install
 
+mkdir -p %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib
+
+mv %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib64 %{buildroot}/%{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64
+
+mkdir -p %{buildroot}/usr/lib64/pkgconfig
+
+ln -s %{OAPI_INSTALL_DIR}/lib64/pkgconfig/tbb.pc %{buildroot}/usr/lib64/pkgconfig/tbb.pc
 
 %files 
+/usr/lib64/pkgconfig/tbb.pc
+%{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64/pkgconfig/tbb.pc
 %{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/include/*
+%{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64/cmake/TBB
 
 %post
 mkdir -p %{OAPI_INSTALL_DIR}/include/oneapi || echo "include path exists."
 ln -s %{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/include/oneapi/tbb* %{OAPI_INSTALL_DIR}/include/oneapi/
 ln -s %{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/include/tbb %{OAPI_INSTALL_DIR}/include/
+mkdir -p %{OAPI_INSTALL_DIR}/lib64/pkgconfig || echo "pkgconfig exists."
+ln -s %{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64/pkgconfig/tbb.pc %{OAPI_INSTALL_DIR}/lib64/pkgconfig/
+mkdir -p %{OAPI_INSTALL_DIR}/lib64/cmake/TBB || echo "cmake path exists."
+ln -s %{OAPI_INSTALL_DIR}/onetbb/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64/cmake/TBB/* %{OAPI_INSTALL_DIR}/lib64/cmake/TBB/
 /sbin/ldconfig
 
 %postun
 rm -r %{OAPI_INSTALL_DIR}/include/oneapi/tbb* || echo "oneapi include path not present."
 rm -r %{OAPI_INSTALL_DIR}/include/tbb || echo "tbb include path not present."
+rm -r %{OAPI_INSTALL_DIR}/lib64/pkgconfig/tbb.pc || echo "TBB pkgconfig not found."
+rm -r %{OAPI_INSTALL_DIR}/lib64/cmake/TBB || echo "cmake not found."
 /sbin/ldconfig
 
