@@ -2,7 +2,7 @@
 %define _build_id_links none
 %define _unpackaged_files_terminate_build 0
 
-%global builddir %{_builddir}/onetbb-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}-%{OAPI_LIBPATCH_VERSION}%{?dist}
+%global builddir %{_builddir}/onetbb-devel-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}-%{OAPI_LIBPATCH_VERSION}%{?dist}
 %global OAPI_MAJOR_VERSION g
 %global OAPI_MINOR_VERSION i
 %global OAPI_PATCH_VERSION t
