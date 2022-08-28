@@ -15,7 +15,7 @@
 %global OAPI_GIT_TAG master
 %global OAPI_BUILD_DIR %{builddir}/OAPI-build/build
 %global OAPI_PATCH_DIR %{builddir}/OAPI-build/patch
-%global OAPI_GIT_URL https://github.com/oneapi-src/oneTBB
+%global OAPI_GIT_URL https://github.com/intel/cm-compiler
 
 BuildRequires: numactl-devel
 BuildRequires: numactl
