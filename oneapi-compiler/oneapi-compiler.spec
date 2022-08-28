@@ -113,8 +113,8 @@ mv %{_sourcedir}/cm-compiler %{OAPI_GIT_DIR}/cm-compiler-%{OAPI_MAJOR_VERSION}.%
 # Level 2 : Build
 
 cd %{OAPI_BUILD_DIR}
-#export CC=clang
-#export CXX=clang++
+export CC=clang
+export CXX=clang++
 
     cmake -GNinja -S %{OAPI_GIT_DIR}/cm-compiler-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/llvm \
     -DCMAKE_BUILD_TYPE=Release  \
