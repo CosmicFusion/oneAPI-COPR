@@ -41,6 +41,7 @@ Provides:      onevpl-cpu-devel
 Provides:      onevpl-cpu-devel(x86-64)
 
 Obsoletes:  	oneVPL-devel
+Obsoletes:  	oneVPL-intel-gpu-devel
 
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig

@@ -41,6 +41,8 @@ Provides:      onevpl-cpu
 Provides:      onevpl-cpu(x86-64)
 
 Obsoletes:  	oneVPL
+Obsoletes:  	python3-oneVPL
+Obsoletes:  	oneVPL-intel-gpu
 
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
@@ -187,7 +189,7 @@ ln -s %{OAPI_INSTALL_DIR}/env/onevpl/vars.sh  %{buildroot}/etc/profile.d/onevpl-
 %{OAPI_INSTALL_DIR}/onevpl/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64/*vpl*
 %{OAPI_INSTALL_DIR}/onevpl/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/env/*
 %{OAPI_INSTALL_DIR}/onevpl/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/licensing/*
-%{OAPI_INSTALL_DIR}/onevpl/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/python
+%{OAPI_INSTALL_DIR}/onevpl/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64/python
 %{OAPI_INSTALL_DIR}/onevpl/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/modulefiles
 
 %post
@@ -200,7 +202,7 @@ mkdir -p %{OAPI_INSTALL_DIR}/licensing || echo "licensing path exists."
 ln -s %{OAPI_INSTALL_DIR}/onevpl/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/licensing %{OAPI_INSTALL_DIR}/licensing/onevpl
 ln -s %{OAPI_INSTALL_DIR}/onevpl/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/env/../lib/intel64 %{OAPI_INSTALL_DIR}/onevpl/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/env/../lib/intel64/gcc4.8
 mkdir -p %{OAPI_INSTALL_DIR}/python || echo "python path exists."
-ln -s %{OAPI_INSTALL_DIR}/onevpl/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/python %{OAPI_INSTALL_DIR}/python/onevpl
+%{OAPI_INSTALL_DIR}/onevpl/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64/python %{OAPI_INSTALL_DIR}/lib64/python/onevpl
 mkdir -p %{OAPI_INSTALL_DIR}/modulefiles || echo "module path exists."
 ln -s %{OAPI_INSTALL_DIR}/onevpl/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/modulefiles %{OAPI_INSTALL_DIR}/modulefiles/onevpl
 /sbin/ldconfig
@@ -211,6 +213,6 @@ rm -r %{OAPI_INSTALL_DIR}/lib64/*vpl* || echo "vpl libs not present"
 rm -r %{OAPI_INSTALL_DIR}/env/onevpl || echo "env path not found." 
 rm -r %{OAPI_INSTALL_DIR}/licensing/onevpl || echo "licensing not found."
 rm -r %{OAPI_INSTALL_DIR}/onevpl/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/env/../lib/intel64/gcc4.8 || echo "upstream dir not linked"
-rm -r %{OAPI_INSTALL_DIR}/python/onevpl || echo "python not found."
+rm -r %{OAPI_INSTALL_DIR}/lib64/python/onevpl || echo "python not found."
 rm -r %{OAPI_INSTALL_DIR}/modulefiles/onevpl || echo "modulefiles not found."
 /sbin/ldconfig
