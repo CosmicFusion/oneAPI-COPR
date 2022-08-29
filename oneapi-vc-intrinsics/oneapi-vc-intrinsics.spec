@@ -146,10 +146,13 @@ echo %{OAPI_INSTALL_DIR}/vci/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PA
 
 %files
 /etc/ld.so.conf.d/*
-%{OAPI_INSTALL_DIR}/oneapi-vc-intrinsics/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}
+%{OAPI_INSTALL_DIR}/vci/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}
 
 %post
+mkdir -p %{OAPI_INSTALL_DIR}/include/oneapi/ || echo "include path exists."
+ln -s %{OAPI_INSTALL_DIR}/vci/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/include %{OAPI_INSTALL_DIR}/include/oneapi/vci
 /sbin/ldconfig
 
 %postun
+rm -r %{OAPI_INSTALL_DIR}/include/oneapi/vci || echo "oneapi include path not present."
 /sbin/ldconfig

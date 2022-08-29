@@ -66,6 +66,8 @@ BuildRequires:  pkgconfig(wayland-protocols) >= 1.15
 BuildRequires:  pkgconfig(x11)
 BuildRequires:  python3dist(pybind11)
 BuildRequires:  python3-devel
+BuildRequires:  python3-devel
+BuildRequires:  oneapi-vc-intrinsics
 
 Provides:      oneapi-compiler
 Provides:      oneapi-compiler(x86-64)
@@ -121,7 +123,7 @@ export CXX=clang++
     -DCMAKE_INSTALL_PREFIX=%{OAPI_INSTALL_DIR}/oneapi-compiler/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION} \
     -DCMAKE_INSTALL_LIBDIR=%{OAPI_INSTALL_DIR}/oneapi-compiler/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64 \
     -DCMAKE_INSTALL_DOCDIR=%{OAPI_INSTALL_DIR}/oneapi-compiler/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/share/doc \
-    -DLLVM_TARGETS_TO_BUILD=GenX\;X86 \
+    -DLLVMGenXIntrinsics_DIR="%{OAPI_GLOBAL_DIR}/include/oneapi/vci/llvm/GenXIntrinsics/" \
     -DLLVM_BUILD_UTILS=ON \
     -DLLVM_ENABLE_BINDINGS=OFF \
     -DOCAMLFIND=NO \
