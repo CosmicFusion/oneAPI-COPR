@@ -68,6 +68,9 @@ BuildRequires:  python3dist(pybind11)
 BuildRequires:  python3-devel
 BuildRequires:  python3-devel
 BuildRequires:  oneapi-vc-intrinsics
+BuildRequires: spirv-llvm8.0-translator-devel
+BuildRequires: llvm8.0-devel
+BuildRequires: llvm8.0-static
 
 Provides:      oneapi-compiler
 Provides:      oneapi-compiler(x86-64)
@@ -129,7 +132,8 @@ export CXX=clang++
     -DOCAMLFIND=NO \
     -DLLVM_ENABLE_OCAMLDOC=OFF \
     -DLLVM_INCLUDE_BENCHMARKS=OFF \
-    -DLLVM_BUILD_TESTS=OFF
+    -DLLVM_BUILD_TESTS=OFF \
+    -DLLVM_CMAKE_PATH=%{_libdir}/llvm8.0
     
     ninja -j$(nproc)
 
