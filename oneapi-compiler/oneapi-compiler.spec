@@ -16,6 +16,7 @@
 %global OAPI_BUILD_DIR %{builddir}/OAPI-build/build
 %global OAPI_PATCH_DIR %{builddir}/OAPI-build/patch
 %global OAPI_GIT_URL https://github.com/intel/cm-compiler
+%global OAPI_PATCH_1 LLVMGenXI.patch
 
 BuildRequires: numactl-devel
 BuildRequires: numactl
@@ -115,7 +116,18 @@ cd %{builddir}
 
 mv %{_sourcedir}/cm-compiler %{OAPI_GIT_DIR}/cm-compiler-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}
 
-# Level 2 : Build
+
+# Level 2 : Patch
+
+cd %{OAPI_PATCH_DIR}
+wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/oneapi-compiler/%{ROCM_PATCH_1}
+
+cd %{OAPI_GIT_DIR}/cm-compiler-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/llvm
+
+patch -Np1 -i "%{OAPI_PATCH_DIR}/%{OAPI_PATCH_1}"
+
+
+# Level 3 : Build
 
 cd %{OAPI_BUILD_DIR}
 export CC=clang
@@ -130,6 +142,7 @@ export CXX=clang++
     -DLLVM_BUILD_UTILS=ON \
     -DLLVM_ENABLE_BINDINGS=OFF \
     -DOCAMLFIND=NO \
+    -DLLVM_TARGETS_TO_BUILD=GenX\;X86 \
     -DLLVM_ENABLE_OCAMLDOC=OFF \
     -DLLVM_INCLUDE_BENCHMARKS=OFF \
     -DLLVM_BUILD_TESTS=OFF \
