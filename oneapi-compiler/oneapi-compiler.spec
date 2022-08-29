@@ -16,7 +16,7 @@
 %global OAPI_BUILD_DIR %{builddir}/OAPI-build/build
 %global OAPI_PATCH_DIR %{builddir}/OAPI-build/patch
 %global OAPI_GIT_URL https://github.com/intel/cm-compiler
-%global OAPI_PATCH_1 LLVMGenXI.patch
+%global OAPI_PATCH_1 include-stdlib.patch
 
 BuildRequires: numactl-devel
 BuildRequires: numactl
@@ -119,12 +119,13 @@ mv %{_sourcedir}/cm-compiler %{OAPI_GIT_DIR}/cm-compiler-%{OAPI_MAJOR_VERSION}.%
 
 # Level 2 : Patch
 
-#cd %{OAPI_PATCH_DIR}
-#wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/oneapi-compiler/%{OAPI_PATCH_1}
+cd %{OAPI_PATCH_DIR}
 
-#cd %{OAPI_GIT_DIR}/cm-compiler-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/llvm
+wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/oneapi-compiler/%{OAPI_PATCH_1}
 
-#patch -Np1 -i "%{OAPI_PATCH_DIR}/%{OAPI_PATCH_1}"
+cd %{OAPI_GIT_DIR}/cm-compiler-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/llvm
+
+patch -Np1 -i "%{OAPI_PATCH_DIR}/%{OAPI_PATCH_1}"
 
 
 # Level 3 : Build
