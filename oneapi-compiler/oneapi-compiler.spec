@@ -119,13 +119,13 @@ mv %{_sourcedir}/cm-compiler %{OAPI_GIT_DIR}/cm-compiler-%{OAPI_MAJOR_VERSION}.%
 
 # Level 2 : Patch
 
-cd %{OAPI_PATCH_DIR}
+#cd %{OAPI_PATCH_DIR}
 
-wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/oneapi-compiler/%{OAPI_PATCH_1}
+#wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/oneapi-compiler/%{OAPI_PATCH_1}
 
-cd %{OAPI_GIT_DIR}/cm-compiler-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/llvm
+#cd %{OAPI_GIT_DIR}/cm-compiler-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/llvm
 
-patch -Np1 -i "%{OAPI_PATCH_DIR}/%{OAPI_PATCH_1}"
+#patch -Np1 -i "%{OAPI_PATCH_DIR}/%{OAPI_PATCH_1}"
 
 
 # Level 3 : Build
@@ -140,7 +140,6 @@ export CXX=clang++
     -DCMAKE_INSTALL_LIBDIR=%{OAPI_INSTALL_DIR}/oneapi-compiler/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/lib/intel64 \
     -DCMAKE_INSTALL_DOCDIR=%{OAPI_INSTALL_DIR}/oneapi-compiler/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/share/doc \
     -DLLVMGenXIntrinsics_DIR="%{OAPI_GLOBAL_DIR}/include/oneapi/vci/llvm/GenXIntrinsics/" \
-    -DLLVM_BUILD_UTILS=ON \
     -DLLVM_ENABLE_BINDINGS=OFF \
     -DOCAMLFIND=NO \
     -DLLVM_TARGETS_TO_BUILD=GenX\;X86 \
