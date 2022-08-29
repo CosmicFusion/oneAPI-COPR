@@ -1,6 +1,6 @@
-diff '--color=auto' -uraN ./a/utils/FileCheck/FileCheck.cpp ./b/utils/FileCheck/FileCheck.cpp
---- ./a/utils/FileCheck/FileCheck.cpp	2022-08-29 19:12:58.910120204 +0300
-+++ ./b/utils/FileCheck/FileCheck.cpp	2022-08-29 19:17:11.149280601 +0300
+diff '--color=auto' -uraN ./utils/FileCheck/FileCheck.cpp ../b/utils/FileCheck/FileCheck.cpp
+--- ./utils/FileCheck/FileCheck.cpp	2022-08-29 19:12:58.910120000 +0300
++++ ../b/utils/FileCheck/FileCheck.cpp	2022-08-29 19:17:11.149280601 +0300
 @@ -28,6 +28,7 @@
  #include "llvm/Support/SourceMgr.h"
  #include "llvm/Support/raw_ostream.h"
