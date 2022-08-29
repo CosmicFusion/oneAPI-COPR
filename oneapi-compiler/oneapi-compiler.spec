@@ -120,7 +120,7 @@ mv %{_sourcedir}/cm-compiler %{OAPI_GIT_DIR}/cm-compiler-%{OAPI_MAJOR_VERSION}.%
 # Level 2 : Patch
 
 cd %{OAPI_PATCH_DIR}
-wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/oneapi-compiler/%{ROCM_PATCH_1}
+wget https://raw.githubusercontent.com/CosmicFusion/oneAPI-COPR/main/oneapi-compiler/%{OAPI_PATCH_1}
 
 cd %{OAPI_GIT_DIR}/cm-compiler-%{OAPI_MAJOR_VERSION}.%{OAPI_MINOR_VERSION}.%{OAPI_PATCH_VERSION}/llvm
 
