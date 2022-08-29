@@ -48,6 +48,8 @@ Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 
 BuildRequires: git
+#BuildRequires: oneapi-compiler
+BuildRequires: intel-cm-compiler
 BuildRequires: oneitt-devel
 BuildRequires: wget
 BuildRequires: oneapi-core
