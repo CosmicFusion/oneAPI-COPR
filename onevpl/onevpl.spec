@@ -63,6 +63,7 @@ BuildRequires: libdrm-devel
 BuildRequires: ninja-build
 BuildRequires: libglvnd-devel
 BuildRequires: ocl-icd-devel
+BuildRequires: oneapi-vc-intrinsics
 BuildRequires: opencl-headers
 BuildRequires: hwloc-devel
 BuildRequires:  pkgconfig(libdrm) >= 2.4.91
@@ -173,7 +174,8 @@ cmake -Wno-dev -GNinja -S %{OAPI_GIT_DIR}/oneVPL-intel-gpu-%{OAPI_MAJOR_VERSION}
 -DCMAKE_INSTALL_DOCDIR=%{OAPI_INSTALL_DIR}/onevpl/%{OAPI_MAJOR_VERSION}%{OAPI_MINOR_VERSION}%{OAPI_PATCH_VERSION}/share/doc \
 -DENABLE_ITT=ON \
 -DCMAKE_ITT_HOME=/opt/intel/oneapi/oneitt/git \
--DBUILD_KERNELS=ON
+-DBUILD_KERNELS=ON \
+-DLLVMGenXIntrinsics_DIR="%{OAPI_GLOBAL_DIR}/include/oneapi/vci/llvm/GenXIntrinsics/"
 
 ninja -j$(nproc)
 
